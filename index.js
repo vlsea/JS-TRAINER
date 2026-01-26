@@ -4,21 +4,21 @@ document.getElementById("app").innerHTML = `
 <h1>Hello Egorushka!</h1>
 `;
 
-
-// let a = 10
-// let b = 5
-// if (a + b >= 15) {
-//     console.log ("да")
-// }
-// else {
-//     console.log("нет")
+// let summ = 0;
+// for (let i = 0; summ <= 50; i++) {
+//     console.log(summ);summ ++
 // }
 
 
-let x = 5
-let y = "5"
-if (x === y) {
-    console.log("равны")
-}
-    else {console.log ("не равны")
-}
+
+// for (let i = 50; i >= 25; i--){
+//     console.log(i)
+// }
+
+
+// for (let i = 2500; i <= 3000; i++){
+//     if (i%2===1) {console.log(i)}
+// }
+
+
+
