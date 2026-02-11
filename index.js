@@ -1,55 +1,41 @@
-// import "./index.mjs";
+let a = "время покушац";
+function showValue() {
+  const outputDiv = document.getElementById("output");
+  outputDiv.innerHTML = a;
+}
+document.getElementById("btn").addEventListener("click", showValue);
 
-document.getElementById("app").innerHTML = `
-<h1>Hello Egorushka!</h1>
-`;
+function getNumbers() {
+  const a = Number(document.getElementById("num1").value);
+  const b = Number(document.getElementById("num2").value);
+  return { a, b };
+}
 
+function add() {
+  const { a, b } = getNumbers();
+  document.getElementById("result").textContent = a + b;
+}
 
+function sub() {
+  const { a, b } = getNumbers();
+  document.getElementById("result").textContent = a - b;
+}
 
-// let a = null;
-// let b = 1;
-// let c = 2;
-// console.log(a ?? b ?? c);
+function mul() {
+  const { a, b } = getNumbers();
+  document.getElementById("result").textContent = a * b;
+}
 
+function div() {
+  const { a, b } = getNumbers();
+  if (b === 0) {
+    document.getElementById("result").textContent = "Ошибка: деление на 0";
+  } else {
+    document.getElementById("result").textContent = a / b;
+  }
+}
 
-
-// let a = 2;
-// let userInput = prompt("введите число");
-// let numberInput = +userInput;
-// switch (numberInput) {
-//   case a:
-//         alert("верно");
-//         break
-//     default:
-//   alert("не верно");
-//     break
-// }
-
-
-// let userInput = prompt("Введите месяц (1-12):");
-// let month = +userInput;
-
-// switch (month) {
-//   case 1:
-//   case 2:
-//   case 12:
-//     console.log("Зима");
-//     break;
-//   case 3:
-//   case 4:
-//   case 5:
-//     console.log("Весна");
-//     break;
-//   case 6:
-//   case 7:
-//   case 8:
-//     console.log("Лето");
-//     break;
-//   case 9:
-//   case 10:
-//   case 11:
-//     console.log("Осень");
-//     break;
-//   default:
-//     console.log("Неверный месяц (1-12)");
-// }
+document.getElementById("add").addEventListener("click", add);
+document.getElementById("sub").addEventListener("click", sub);
+document.getElementById("mul").addEventListener("click", mul);
+document.getElementById("div").addEventListener("click", div);
