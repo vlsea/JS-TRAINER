@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Погода API</title>
+  <link rel="stylesheet" href="/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-
-    <h1>🌤️ Погода в реальном времени</h1>
+  <h2>Управление Set</h2>
     
-  
-    <input type="text" id="cityInput" placeholder="Введите город (Москва)" value="Москва">
-    <button onclick="getWeather()">🔍 Показать погоду</button>
-    <br><br>
-    <div id="loading" style="display: none;"> Загружаем погоду...</div>
-    <div id="weatherResult" style="display: none;">
-        <div id="temp">--</div>
-        <div id="description">--</div>
-        <div id="wind">--</div>
-        <div id="humidity">--</div>
-        <div id="country">--</div>
-        <div id="sunrise">--</div>
-        <div id="sunset">--</div>
-    </div>
-    <script src="index.js"></script>
+    <h3>Инициализация Set</h3>
+    <div id="initial-set"></div>
+    
+    <h3>Добавить элемент</h3>
+    <input type="text" id="input-add" placeholder="Введите элемент">
+    <button onclick="addToSet()">Добавить</button>
+    <div id="current-set"></div>
+    
+    <h3>Проверить наличие</h3>
+    <input type="text" id="input-check" placeholder="Введите элемент для проверки">
+    <button onclick="checkElement()">Проверить</button>
+    <div id="check-result"></div>
+    
+    <h3>Фильтр массива (>5)</h3>
+    <button onclick="filterArray()">Фильтровать массив</button>
+    <div id="filtered-array"></div>
+    
+  <script src="index.js"></script>
 </body>
 </html>

@@ -1,37 +1,52 @@
-const apiKey = "3109b436a7171d1c4a0cff4ae52ebcf0";
+let mySet = new Set();
 
-async function getWeather() {
-  const city = document.getElementById("cityInput").value || "Москва";
-  document.getElementById("loading").style.display = "block";
-  document.getElementById("weatherResult").style.display = "none";
+function initSet() {
+  const elements = ["e", "r", "i", "k", "t", "h", "e", "b", "e", "s", "t"];
+  elements.forEach((el) => mySet.add(el));
+  document.getElementById("initial-set").innerHTML =
+    "Set: " + Array.from(mySet).join(", ");
+  updateCurrentSet();
+  console.log("Инициализированный Set:", Array.from(mySet));
+}
 
-  try {
-    const coordsRes = await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`,
-    );
-    const coords = await coordsRes.json();
+function updateCurrentSet() {
+  document.getElementById("current-set").innerHTML =
+    "Текущий Set: " + Array.from(mySet).join(", ");
+}
 
-    const weatherRes = await fetch(
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${coords[0].lat}&lon=${coords[0].lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=metric&lang=ru`,
-    );
-    const data = await weatherRes.json();
-    const current = data.current;
-
-    document.getElementById("temp").innerText =
-      `🌡️ ${current.temp.toFixed(1)}°C`;
-    document.getElementById("description").innerText =
-      `☁️ ${current.weather[0].description}`;
-    document.getElementById("wind").innerText = `🌬 ${current.wind_speed} м/с`;
-    document.getElementById("humidity").innerText = `💧 ${current.humidity}%`;
-    document.getElementById("country").innerText = `🌍 ${coords[0].country}`;
-    document.getElementById("sunrise").innerText =
-      `🌅 ${new Date(current.sunrise * 1000).toLocaleTimeString("ru-RU")}`;
-    document.getElementById("sunset").innerText =
-      `🌇 ${new Date(current.sunset * 1000).toLocaleTimeString("ru-RU")}`;
-
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("weatherResult").style.display = "block";
-  } catch (e) {
-    document.getElementById("loading").innerHTML = "❌ Ошибка";
+function addToSet() {
+  const input = document.getElementById("input-add");
+  const value = input.value.trim();
+  if (value) {
+    mySet.add(value);
+    input.value = "";
+    updateCurrentSet();
   }
 }
+
+function checkElement() {
+  const input = document.getElementById("input-check");
+  const value = input.value.trim();
+  const result = mySet.has(value);
+  document.getElementById("check-result").innerHTML = value + ": " + result;
+  input.value = "";
+}
+
+function filterArray() {
+  const arr = [1, 3, 6, 2, 8, 4, 12, 7, 0, 9, 15, 3];
+  const filtered = [];
+  for (const num of arr) {
+    if (num > 5) {
+      filtered.push(num);
+    }
+  }
+  document.getElementById("filtered-array").innerHTML =
+    "Исходный: [" +
+    arr.join(", ") +
+    "]<br>" +
+    "Новый (>5): [" +
+    filtered.join(", ") +
+    "]";
+}
+
+window.onload = initSet;
