@@ -7,25 +7,46 @@
   <title>Document</title>
 </head>
 <body>
-  <h2>Управление Set</h2>
-    
-    <h3>Инициализация Set</h3>
-    <div id="initial-set"></div>
-    
-    <h3>Добавить элемент</h3>
-    <input type="text" id="input-add" placeholder="Введите элемент">
-    <button onclick="addToSet()">Добавить</button>
-    <div id="current-set"></div>
-    
-    <h3>Проверить наличие</h3>
-    <input type="text" id="input-check" placeholder="Введите элемент для проверки">
-    <button onclick="checkElement()">Проверить</button>
-    <div id="check-result"></div>
-    
-    <h3>Фильтр массива (>5)</h3>
-    <button onclick="filterArray()">Фильтровать массив</button>
-    <div id="filtered-array"></div>
-    
+    <h1>События DOM</h1>
+
+    <section>
+        <h2>Див клик (+15px)</h2>
+        <div class="grow-div" onclick="growDiv(this)">Кликни меня</div>
+    </section>
+
+    <section>
+        <h2>Див двойной клик</h2>
+        <div class="dblclick-div" ondblclick="dblClickDiv(this)">
+            <strong>Иван Иванов</strong><br>
+            Возраст: 28 лет<br>
+            Профессия: Разработчик<br>
+            Город: Санкт-Петербург
+        </div>
+    </section>
+
+    <section>
+        <h2>Переключение картинок</h2>
+        <img class="image-toggle" 
+             src="https://via.placeholder.com/250x180/ff6b6b/ffffff?text=Картинка+1" 
+             onclick="toggleImage(this)" 
+             alt="Картинка 1">
+    </section>
+
+    <section>
+        <h2>Код символа</h2>
+        <input type="text" id="char-input" placeholder="Один символ" maxlength="1">
+        <button onclick="getCharCode()">Получить код</button>
+        <div id="char-code-result"></div>
+    </section>
+
+    <section>
+        <h2>Проверка цифры</h2>
+        <input type="text" id="digit-input" placeholder="Один символ">
+        <button onclick="checkDigit()">Проверить</button>
+        <div id="digit-result"></div>
+    </section>
+
+
   <script src="index.js"></script>
 </body>
 </html>
