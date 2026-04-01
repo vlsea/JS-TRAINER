@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AJAX — GET и POST</title>
+  </head>
+  <body>
+    <h1>AJAX Демонстрация (XMLHttpRequest)</h1>
+
+    <button onclick="ajaxGet()">1. GET запрос</button>
+    <button onclick="ajaxPost()">2. POST запрос</button>
+
+    <div
+      id="result"
+      style="
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        white-space: pre-wrap;
+      "
+    ></div>
+
+    <script>
+      function ajaxGet() {
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            document.getElementById("result").innerHTML =
+              "<b>GET ответ:</b><br>" + this.responseText;
+          }
+        };
+
+        xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+        xhttp.send();
+      }
+
+      function ajaxPost() {
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            document.getElementById("result").innerHTML =
+              "<b>POST ответ:</b><br>" + this.responseText;
+          }
+        };
+
+        xhttp.open("POST", "https://jsonplaceholder.typicode.com/posts", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(
+          JSON.stringify({
+            title: "Тестовый пост через AJAX",
+            body: "Работает!",
+            userId: 1,
+          }),
+        );
+      }
+    </script>
+  </body>
+</html>
