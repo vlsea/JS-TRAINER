@@ -1,12 +1,224 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашняя работа: Web API</title>
     <link rel="stylesheet" href="/styles.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
+</head>
+<body>
+    <h1>Домашняя работа по темам Web API</h1>
+
+   <!-- FormData + Fetch API (POST) -->
+    <section>
+        <h2>1. Отправка формы (FormData + Fetch)</h2>
+        <form id="userForm">
+            <input type="text" id="name" placeholder="Имя" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="file" id="avatar">
+            <button type="submit">Отправить (POST)</button>
+        </form>
+        <div id="formStatus"></div>
+    </section>
+
+ <!-- URLSearchParams + GET -->
+    <section>
+        <h2>2. Поиск с параметрами (URLSearchParams + GET)</h2>
+        <div class="input-group">
+            <input type="text" id="query" placeholder="Поисковый запрос">
+            <button class="search-btn">Поиск GET</button>
+        </div>
+        <div id="searchResults"></div>
+    </section>
+
+    <!-- URLSearchParams + GET -->
+    <section>
+        <h2>3. XMLHttpRequest (PUT обновление)</h2>
+        <div class="input-group">
+            <input type="number" id="postId" placeholder="ID поста" value="1">
+            <input type="text" id="newTitle" placeholder="Новый заголовок">
+            <button class="xhr-btn">Обновить PUT</button>
+        </div>
+        <div id="xhrStatus"></div>
+    </section>
+
+    <!-- Хранилища и cookies -->
+    <section>
+        <h2>4. Куки, LocalStorage, sessionStorage</h2>
+        <div class="input-group">
+            <input type="text" id="storageKey" placeholder="Ключ" value="theme">
+            <input type="text" id="storageValue" placeholder="Значение" value="dark">
+            <button class="storage-btn" data-action="cookie">Set Cookie</button>
+            <button class="storage-btn" data-action="local">Set LocalStorage</button>
+            <button class="storage-btn" data-action="session">Set sessionStorage</button>
+            <button class="storage-btn" data-action="show">Показать все</button>
+        </div>
+        <div id="storageInfo"></div>
+    </section>
+
+    <!-- Работа с API + отображение -->
+    <section>
+        <h2>5. Получение и отображение данных API</h2>
+        <div class="button-group">
+            <button class="api-btn" data-action="get">Загрузить пользователей GET</button>
+            <button class="api-btn" data-action="post">Создать пост POST</button>
+            <button class="api-btn" data-action="delete">Удалить пост DELETE</button>
+        </div>
+        <div id="users"></div>
+    </section>
+
+    <!--Server Sent Events -->
+    <section>
+        <h2>6. Server-Sent Events</h2>
+        <div class="button-group">
+            <button id="startSSE" class="sse-btn">Запустить SSE</button>
+            <button id="stopSSE" class="sse-btn" disabled>Остановить</button>
+        </div>
+        <div id="sseMessages"></div>
+    </section>
+
+    <!-- Возобновляемая загрузка -->
+    <section>
+        <h2>7. Возобновляемая загрузка файлов (демо класс)</h2>
+        <div class="input-group">
+            <input type="file" id="bigFile">
+            <button class="upload-btn">Загрузить с возобновлением</button>
+        </div>
+        <div id="uploadProgress">Прогресс: 0%</div>
+    </section>
+
     <script src="index.js" type="module"></script>
-  </body>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    <link rel="stylesheet" href="/styles.css" />
+  <script src="index.js" type="module"></script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
