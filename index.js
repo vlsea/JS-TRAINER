@@ -1,177 +1,261 @@
-const API_BASE = "https://jsonplaceholder.typicode.com";
+class TodoApp {
+  constructor() {
+    this.tasks = JSON.parse(localStorage.getItem("todos")) || [];
+    this.currentFilter = "all";
+    this.editingId = null;
+    this.init();
+  }
 
-document.addEventListener("DOMContentLoaded", function () {
-  // 1. FormData + Fetch POST
-  document.getElementById("userForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", document.getElementById("name").value);
-    formData.append("email", document.getElementById("email").value);
-    formData.append("avatar", document.getElementById("avatar").files[0]);
+  init() {
+    this.cacheElements();
+    this.bindEvents();
+    this.render();
+  }
 
-    try {
-      const response = await fetch(`${API_BASE}/users`, {
-        method: "POST",
-        body: formData,
+  cacheElements() {
+    this.todoForm = document.getElementById("todoForm");
+    this.newTaskInput = document.getElementById("newTask");
+    this.todoList = document.getElementById("todoList");
+    this.taskCounter = document.getElementById("taskCounter");
+    this.clearCompletedBtn = document.getElementById("clearCompleted");
+    this.clearAllBtn = document.getElementById("clearAll");
+  }
+
+  bindEvents() {
+
+    this.todoForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.saveTask();
+    });
+
+   
+    document.querySelectorAll(".filter-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        this.setFilter(btn.dataset.filter);
       });
-      const data = await response.json();
-      document.getElementById("formStatus").textContent =
-        `Создали: ${data.name || "OK"}`;
-    } catch (err) {
-      document.getElementById("formStatus").textContent = "Ошибка отправки!";
-    }
-  });
+    });
 
-  // 2. URLSearchParams + GET
-  document.querySelector(".search-btn").addEventListener("click", function () {
-    const query = document.getElementById("query").value;
-    const url = new URL(`${API_BASE}/users`);
-    const params = new URLSearchParams({ q: query });
-    url.search = params;
+    
+    this.clearCompletedBtn.addEventListener("click", () =>
+      this.clearCompleted(),
+    );
+    this.clearAllBtn.addEventListener("click", () => this.clearAll());
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((users) => {
-        document.getElementById("searchResults").innerHTML = users
-          .slice(0, 5)
-          .map((u) => `<p><strong>${u.name}</strong> (${u.email})</p>`)
-          .join("");
-      });
-  });
+    document
+      .getElementById("exportBtn")
+      .addEventListener("click", () => this.exportData());
+    document
+      .getElementById("importBtn")
+      .addEventListener("click", () => this.importData());
+    document
+      .getElementById("importFile")
+      .addEventListener("change", (e) => this.handleImport(e));
 
-  // 3. XMLHttpRequest PUT
-  document.querySelector(".xhr-btn").addEventListener("click", function () {
-    const id = document.getElementById("postId").value;
-    const title = document.getElementById("newTitle").value;
-    const xhr = new XMLHttpRequest();
-    xhr.open("PUT", `${API_BASE}/posts/${id}`);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onload = () => {
-      document.getElementById("xhrStatus").textContent =
-        xhr.status === 200 ? "Обновлено XHR!" : `Ошибка: ${xhr.status}`;
-    };
-    xhr.send(JSON.stringify({ title, id: +id }));
-  });
-
-  // 4. Cookies, localStorage, sessionStorage
-  document.querySelectorAll(".storage-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const key = document.getElementById("storageKey").value;
-      const value = document.getElementById("storageValue").value;
-      const action = this.dataset.action;
-
-      if (action === "cookie") {
-        document.cookie = `${key}=${value}; max-age=3600`;
-      } else if (action === "local") {
-        localStorage.setItem(key, value);
-      } else if (action === "session") {
-        sessionStorage.setItem(key, value);
-      } else if (action === "show") {
-        const info = document.getElementById("storageInfo");
-        info.innerHTML = `
-                    <p><strong>Cookie:</strong> ${document.cookie}</p>
-                    <p><strong>localStorage.${key}:</strong> ${localStorage.getItem(key)}</p>
-                    <p><strong>sessionStorage.${key}:</strong> ${sessionStorage.getItem(key)}</p>
-                `;
+  
+    this.todoList.addEventListener("change", (e) => {
+      if (e.target.classList.contains("task-checkbox")) {
+        const taskId = parseInt(e.target.dataset.taskId);
+        this.toggleTask(taskId);
       }
     });
-  });
 
-  // 5. методы API
-  document.querySelectorAll(".api-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const action = this.dataset.action;
-      if (action === "get") {
-        fetch(`${API_BASE}/users`)
-          .then((res) => res.json())
-          .then((users) => {
-            const table = document.getElementById("users");
-            table.innerHTML =
-              "<table><thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Телефон</th></tr></thead><tbody>" +
-              users
-                .slice(0, 10)
-                .map(
-                  (u) =>
-                    `<tr><td>${u.id}</td><td>${u.name}</td><td>${u.email}</td><td>${u.phone}</td></tr>`,
-                )
-                .join("") +
-              "</tbody></table>";
-          });
-      } else if (action === "post") {
-        fetch(`${API_BASE}/posts`, {
-          method: "POST",
-          body: JSON.stringify({
-            title: "Мой пост",
-            body: "Содержимое",
-            userId: 1,
-          }),
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((res) => res.json())
-          .then((data) => console.log("Создан пост:", data));
-      } else if (action === "delete") {
-        fetch(`${API_BASE}/posts/1`, { method: "DELETE" }).then((res) =>
-          console.log("Удалено:", res.status),
-        );
+    this.todoList.addEventListener("click", (e) => {
+      const taskId = parseInt(e.target.dataset.taskId);
+
+      if (e.target.classList.contains("delete-btn")) {
+        this.deleteTask(taskId);
+      } else if (e.target.classList.contains("edit-btn")) {
+        this.startEdit(taskId);
       }
     });
-  });
+  }
 
-  // 6. Server Sent Events
-  document.getElementById("startSSE").addEventListener("click", function () {
-    const eventSource = new EventSource("https://httpbin.org/stream/10");
-    eventSource.onmessage = (e) => {
-      document.getElementById("sseMessages").innerHTML +=
-        `<p>${new Date().toLocaleTimeString()}: ${e.data}</p>`;
-    };
-    eventSource.onerror = () => {
-      document.getElementById("sseMessages").innerHTML +=
-        '<p style="color:red">SSE ошибка</p>';
-      eventSource.close();
-    };
-    document.getElementById("startSSE").disabled = true;
-    document.getElementById("stopSSE").disabled = false;
-    this.dataset.source = eventSource;
-  });
+  saveTask() {
+    const text = this.newTaskInput.value.trim();
+    if (!text) return;
 
-  document.getElementById("stopSSE").addEventListener("click", function () {
-    const eventSource = document.getElementById("startSSE").dataset.source;
-    if (eventSource) eventSource.close();
-    document.getElementById("startSSE").disabled = false;
-    this.disabled = true;
-    document.getElementById("sseMessages").innerHTML += "<p>Остановлено</p>";
-  });
-
-  // 7. Реализована функция для возобновляемой загрузки
-  document.querySelector(".upload-btn").addEventListener("click", function () {
-    const file = document.getElementById("bigFile").files[0];
-    if (!file) return alert("Выберите файл");
-
-    const uploader = new Uploader(file);
-    uploader.upload();
-  });
-
-  // Здесь класс для возобновляемой загрузки 
-  class Uploader {
-    constructor(file) {
-      this.file = file;
-      this.fileId = file.name + "-" + Date.now();
+    if (this.editingId !== null) {
+  
+      this.tasks = this.tasks.map((task) =>
+        task.id === this.editingId ? { ...task, text } : task,
+      );
+      this.editingId = null;
+    } else {
+  
+      const task = {
+        id: Date.now(),
+        text,
+        completed: false,
+        created: new Date().toISOString(),
+      };
+      this.tasks.unshift(task);
     }
-    async upload() {
-      const progress = document.getElementById("uploadProgress");
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://httpbin.org/post");
-      xhr.setRequestHeader("X-File-Id", this.fileId);
-      xhr.upload.onprogress = (e) => {
-        if (e.lengthComputable) {
-          const percent = Math.round((e.loaded / e.total) * 100);
-          progress.textContent = `Прогресс: ${percent}%`;
-        }
-      };
-      xhr.onload = () => {
-        progress.textContent = "Загрузка завершена!";
-      };
-      xhr.send(this.file);
+
+    this.newTaskInput.value = "";
+    this.save();
+    this.render();
+  }
+
+  toggleTask(id) {
+    this.tasks = this.tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task,
+    );
+    this.save();
+    this.render();
+  }
+
+  startEdit(id) {
+    const task = this.tasks.find((t) => t.id === id);
+    if (task) {
+      this.editingId = id;
+      this.newTaskInput.value = task.text;
+      this.newTaskInput.focus();
+      this.newTaskInput.select();
     }
   }
-});
+
+  deleteTask(id) {
+    if (confirm("Удалить задачу?")) {
+      this.tasks = this.tasks.filter((task) => task.id !== id);
+      this.save();
+      this.render();
+    }
+  }
+
+  setFilter(filter) {
+    this.currentFilter = filter;
+    document.querySelectorAll(".filter-btn").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.filter === filter);
+    });
+    this.render();
+  }
+
+  clearCompleted() {
+    this.tasks = this.tasks.filter((task) => !task.completed);
+    this.save();
+    this.render();
+  }
+
+  clearAll() {
+    if (confirm("Удалить ВСЕ задачи?")) {
+      this.tasks = [];
+      this.save();
+      this.render();
+    }
+  }
+
+  exportData() {
+    const dataStr = JSON.stringify(this.tasks, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `todos-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  handleImport(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const tasks = JSON.parse(event.target.result);
+        if (Array.isArray(tasks)) {
+          this.tasks = tasks.map((task) => ({
+            id: task.id || Date.now() + Math.random(),
+            text: task.text || "",
+            completed: !!task.completed,
+            created: task.created || new Date().toISOString(),
+          }));
+          this.save();
+          this.render();
+          alert("✅ Импорт завершен!");
+        }
+      } catch {
+        alert("❌ Неверный JSON файл!");
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  importData() {
+    document.getElementById("importFile").click();
+  }
+
+  getFilteredTasks() {
+    const tasks = this.tasks;
+    switch (this.currentFilter) {
+      case "active":
+        return tasks.filter((task) => !task.completed);
+      case "completed":
+        return tasks.filter((task) => task.completed);
+      default:
+        return tasks;
+    }
+  }
+
+  render() {
+    const tasks = this.getFilteredTasks();
+    const html =
+      tasks.length === 0
+        ? '<li class="empty">🎉 Нет задач! Добавьте первую! 🎉</li>'
+        : tasks
+            .map(
+              (task) => `
+                <li class="todo-item ${task.completed ? "completed" : ""}" data-id="${task.id}">
+                    <input type="checkbox" class="task-checkbox" 
+                           data-task-id="${task.id}"
+                           ${task.completed ? "checked" : ""}>
+                    <span class="task-text">${this.escapeHtml(task.text)}</span>
+                    <div class="task-actions">
+                        <button class="edit-btn" data-task-id="${task.id}" title="Редактировать">✏️</button>
+                        <button class="delete-btn" data-task-id="${task.id}" title="Удалить">🗑️</button>
+                    </div>
+                </li>
+            `,
+            )
+            .join("");
+
+    this.todoList.innerHTML = html;
+    this.updateUI();
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  updateUI() {
+    const total = this.tasks.length;
+    const completed = this.tasks.filter((t) => t.completed).length;
+    this.taskCounter.textContent = `Задач: ${total} (выполнено: ${completed})`;
+
+    const hasCompleted = this.tasks.some((t) => t.completed);
+    const hasTasks = this.tasks.length > 0;
+
+    this.clearCompletedBtn.disabled = !hasCompleted;
+    this.clearAllBtn.disabled = !hasTasks;
+
+
+    if (this.editingId !== null) {
+      const editingItem = this.todoList.querySelector(
+        `[data-id="${this.editingId}"]`,
+      );
+      if (editingItem) {
+        editingItem.style.outline = "3px solid #4facfe";
+      }
+    }
+  }
+
+  save() {
+    localStorage.setItem("todos", JSON.stringify(this.tasks));
+    this.updateUI();
+  }
+}
+
+
+const todoApp = new TodoApp();
