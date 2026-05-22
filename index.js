@@ -654,8 +654,7 @@ usersDataBase.newRegUser = function (
   const info = new Info(name, surname, gender, id, 2, rate);
   this.info.push(info);
 
-  console.log(this.users);
-  console.log(this.info);
+ 
 };
 
 usersDataBase.newRegAdmin = function (login, password, gender, name, surname) {
@@ -674,8 +673,7 @@ usersDataBase.newRegAdmin = function (login, password, gender, name, surname) {
   const info = new Info(name, surname, gender, id, 1);
   this.info.push(info);
 
-  console.log(this.users);
-  console.log(this.info);
+
 };
 
 function Data(login, id, password) {
@@ -697,6 +695,8 @@ function Info(name, surname, gender, id, systemRole, rate) {
 usersDataBase.newRegUser("привет", "123", 1, 3, "Шахзод-убийца", "Прекрасный");
 
 usersDataBase.newRegUser("привет", "123", 1, 3, "Шахзод-убийца", "Прекрасный");
+
+usersDataBase.newRegUser("телепузик", "123", 1, 3, "фывфывфыв", "Прекрасный");
 
 usersDataBase.newRegAdmin("пока", "234", 1, "Биджон", "Красивый");
 
