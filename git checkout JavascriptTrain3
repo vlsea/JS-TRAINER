@@ -1,0 +1,46 @@
+[33mb75fd25[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mReact#1[m[33m, [m[1;31morigin/JavascriptTrain3[m[33m, [m[1;32mJavascriptTrain3[m[33m)[m HEAD@{0}: checkout: moving from JavascriptTrain3 to React#1
+[33mb75fd25[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mReact#1[m[33m, [m[1;31morigin/JavascriptTrain3[m[33m, [m[1;32mJavascriptTrain3[m[33m)[m HEAD@{1}: commit: javascriptTrain3
+[33m4421b39[m[33m ([m[1;31morigin/JavascriptTrain[m[33m, [m[1;32mJavascriptTrain2[m[33m, [m[1;32mJavascriptTrain[m[33m)[m HEAD@{2}: checkout: moving from React#1 to JavascriptTrain3
+[33m4421b39[m[33m ([m[1;31morigin/JavascriptTrain[m[33m, [m[1;32mJavascriptTrain2[m[33m, [m[1;32mJavascriptTrain[m[33m)[m HEAD@{3}: checkout: moving from JavascriptTrain2 to React#1
+[33m4421b39[m[33m ([m[1;31morigin/JavascriptTrain[m[33m, [m[1;32mJavascriptTrain2[m[33m, [m[1;32mJavascriptTrain[m[33m)[m HEAD@{4}: checkout: moving from JavascriptTrain to JavascriptTrain2
+[33m4421b39[m[33m ([m[1;31morigin/JavascriptTrain[m[33m, [m[1;32mJavascriptTrain2[m[33m, [m[1;32mJavascriptTrain[m[33m)[m HEAD@{5}: commit: JavascriptTrain2
+[33mbcf3a39[m HEAD@{6}: checkout: moving from 85e8b562ac0346b68b85c9d9f46751b9d9b7eabb to JavascriptTrain
+[33m85e8b56[m[33m ([m[1;31morigin/MSHP14[m[33m, [m[1;32mMSHP14[m[33m)[m HEAD@{7}: checkout: moving from JavascriptTrain to 85e8b56
+[33mbcf3a39[m HEAD@{8}: commit: JavascriptTrain
+[33m07296e7[m[33m ([m[1;31morigin/MSHP15[m[33m, [m[1;32mMSHP15[m[33m)[m HEAD@{9}: checkout: moving from MSHP15 to JavascriptTrain
+[33m07296e7[m[33m ([m[1;31morigin/MSHP15[m[33m, [m[1;32mMSHP15[m[33m)[m HEAD@{10}: commit: MSHP15
+[33m85e8b56[m[33m ([m[1;31morigin/MSHP14[m[33m, [m[1;32mMSHP14[m[33m)[m HEAD@{11}: checkout: moving from MSHP14 to MSHP15
+[33m85e8b56[m[33m ([m[1;31morigin/MSHP14[m[33m, [m[1;32mMSHP14[m[33m)[m HEAD@{12}: commit: MSHP14
+[33mee8ad35[m[33m ([m[1;31morigin/MSHP13[m[33m, [m[1;32mMSHP13[m[33m)[m HEAD@{13}: checkout: moving from MSHP13 to MSHP14
+[33mee8ad35[m[33m ([m[1;31morigin/MSHP13[m[33m, [m[1;32mMSHP13[m[33m)[m HEAD@{14}: commit: MSHP13
+[33mc27d2ab[m[33m ([m[1;31morigin/MSHP12[m[33m, [m[1;32mMSHP12[m[33m)[m HEAD@{15}: checkout: moving from MSHP12 to MSHP13
+[33mc27d2ab[m[33m ([m[1;31morigin/MSHP12[m[33m, [m[1;32mMSHP12[m[33m)[m HEAD@{16}: commit: MSHP12
+[33m618f968[m[33m ([m[1;31morigin/MSHP11[m[33m, [m[1;32mMSHP11[m[33m)[m HEAD@{17}: checkout: moving from MSHP11 to MSHP12
+[33m618f968[m[33m ([m[1;31morigin/MSHP11[m[33m, [m[1;32mMSHP11[m[33m)[m HEAD@{18}: commit: MSHP11
+[33mba02851[m[33m ([m[1;31morigin/MSHP10[m[33m, [m[1;32mMSHP10[m[33m)[m HEAD@{19}: checkout: moving from MSHP10 to MSHP11
+[33mba02851[m[33m ([m[1;31morigin/MSHP10[m[33m, [m[1;32mMSHP10[m[33m)[m HEAD@{20}: commit: MSHP10
+[33m4136d0b[m[33m ([m[1;31morigin/MSHP9[m[33m, [m[1;32mMSHP9[m[33m)[m HEAD@{21}: checkout: moving from MSHP9 to MSHP10
+[33m4136d0b[m[33m ([m[1;31morigin/MSHP9[m[33m, [m[1;32mMSHP9[m[33m)[m HEAD@{22}: commit: MSHP9
+[33m7812d51[m[33m ([m[1;31morigin/MSHP8[m[33m, [m[1;32mMSHP8[m[33m)[m HEAD@{23}: checkout: moving from MSHP8 to MSHP9
+[33m7812d51[m[33m ([m[1;31morigin/MSHP8[m[33m, [m[1;32mMSHP8[m[33m)[m HEAD@{24}: checkout: moving from MSHP9-branch to MSHP8
+[33m7812d51[m[33m ([m[1;31morigin/MSHP8[m[33m, [m[1;32mMSHP8[m[33m)[m HEAD@{25}: checkout: moving from MSHP8 to MSHP9-branch
+[33m7812d51[m[33m ([m[1;31morigin/MSHP8[m[33m, [m[1;32mMSHP8[m[33m)[m HEAD@{26}: checkout: moving from ranch to MSHP8
+[33m7812d51[m[33m ([m[1;31morigin/MSHP8[m[33m, [m[1;32mMSHP8[m[33m)[m HEAD@{27}: checkout: moving from MSHP8 to ranch
+[33m7812d51[m[33m ([m[1;31morigin/MSHP8[m[33m, [m[1;32mMSHP8[m[33m)[m HEAD@{28}: Branch: renamed refs/heads/MSHP4 to refs/heads/MSHP8
+[33m7812d51[m[33m ([m[1;31morigin/MSHP8[m[33m, [m[1;32mMSHP8[m[33m)[m HEAD@{30}: commit: MSHP8
+[33m152a7b1[m HEAD@{31}: checkout: moving from main to MSHP4
+[33mb554f02[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{32}: commit: MSHP 7
+[33m4555508[m HEAD@{33}: commit (cherry-pick): MSHP6
+[33m4772d4d[m HEAD@{34}: checkout: moving from MSHP4 to main
+[33m152a7b1[m HEAD@{35}: checkout: moving from main to MSHP4
+[33m4772d4d[m HEAD@{36}: checkout: moving from MSHP4 to main
+[33m152a7b1[m HEAD@{37}: commit: MSHP6-switch case
+[33mb5fde21[m[33m ([m[1;31morigin/MSHP4[m[33m)[m HEAD@{38}: checkout: moving from b5fde2193c989ac512025f764d5781565bef0898 to MSHP4
+[33mb5fde21[m[33m ([m[1;31morigin/MSHP4[m[33m)[m HEAD@{39}: checkout: moving from main to b5fde21
+[33m4772d4d[m HEAD@{40}: commit: MSHP5
+[33mb5fde21[m[33m ([m[1;31morigin/MSHP4[m[33m)[m HEAD@{41}: commit: MSHP4
+[33m5253d49[m HEAD@{42}: commit: MSHP3
+[33mb0946d8[m HEAD@{43}: commit: MSHP2
+[33macefc41[m[33m ([m[1;32mstatus[m[33m)[m HEAD@{44}: Branch: renamed refs/heads/main to refs/heads/main
+[33macefc41[m[33m ([m[1;32mstatus[m[33m)[m HEAD@{46}: Branch: renamed refs/heads/main to refs/heads/main
+[33macefc41[m[33m ([m[1;32mstatus[m[33m)[m HEAD@{48}: commit (initial): MSHP#1
