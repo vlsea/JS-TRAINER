@@ -595,114 +595,112 @@
 
 // ------------------------------------------------------------------------------
 
-const usersDataBase = {
-  gender: [
-    { gen: "Мужской", id: 1 },
-    { gen: "Женский", id: 2 },
-  ],
-  systemRole: [
-    { role: "администратор", id: 1 },
-    { role: "пользователь", id: 2 },
-  ],
-  rate: [
-    { rate: "Обычный", id: 1 },
-    { rate: "Премиум", id: 2 },
-    { rate: "VIP", id: 3 },
-  ],
-  users: [],
-  info: [],
-};
-export const getHashPassword = function (password) {
-  let hash = "";
-  for (let i = 0; i < password.length; i++) {
-    hash += password[i].charCodeAt().toString(16);
-  }
-  return hash;
-};
+// const usersDataBase = {
+//   gender: [
+//     { gen: "Мужской", id: 1 },
+//     { gen: "Женский", id: 2 },
+//   ],
+//   systemRole: [
+//     { role: "администратор", id: 1 },
+//     { role: "пользователь", id: 2 },
+//   ],
+//   rate: [
+//     { rate: "Обычный", id: 1 },
+//     { rate: "Премиум", id: 2 },
+//     { rate: "VIP", id: 3 },
+//   ],
+//   users: [],
+//   info: [],
+// };
+// export const getHashPassword = function (password) {
+//   let hash = "";
+//   for (let i = 0; i < password.length; i++) {
+//     hash += password[i].charCodeAt().toString(16);
+//   }
+//   return hash;
+// };
 
-usersDataBase.getRandomId = function () {
-  return Math.trunc(Math.random() * 9000 + 1000);
-};
-usersDataBase.getRandomId();
+// usersDataBase.getRandomId = function () {
+//   return Math.trunc(Math.random() * 9000 + 1000);
+// };
+// usersDataBase.getRandomId();
 
-usersDataBase.uniqueLogin = function (newLogin) {
-  return this.users.some((user) => {
-    return user.login === newLogin;
-  });
-};
+// usersDataBase.uniqueLogin = function (newLogin) {
+//   return this.users.some((user) => {
+//     return user.login === newLogin;
+//   });
+// };
 
-usersDataBase.newRegUser = function (
-  login,
-  password,
-  gender,
-  rate,
-  name,
-  surname,
-) {
-  if (!login || !password || !gender || !rate || !name || !surname) {
-    console.log(`регистрация не прошла :`);
-    return;
-  }
-  if (this.uniqueLogin(login)) {
-    console.log(`логин не уникальный : `);
-    return;
-  }
-  const hashPassword = getHashPassword(password);
-  const id = this.getRandomId();
-  const user = new Data(login, id, hashPassword);
-  this.users.push(user);
-  const info = new Info(name, surname, gender, id, 2, rate);
-  this.info.push(info);
+// usersDataBase.newRegUser = function (
+//   login,
+//   password,
+//   gender,
+//   rate,
+//   name,
+//   surname,
+// ) {
+//   if (!login || !password || !gender || !rate || !name || !surname) {
+//     console.log(`регистрация не прошла :`);
+//     return;
+//   }
+//   if (this.uniqueLogin(login)) {
+//     console.log(`логин не уникальный : `);
+//     return;
+//   }
+//   const hashPassword = getHashPassword(password);
+//   const id = this.getRandomId();
+//   const user = new Data(login, id, hashPassword);
+//   this.users.push(user);
+//   const info = new Info(name, surname, gender, id, 2, rate);
+//   this.info.push(info);
 
- 
-};
+// };
 
-usersDataBase.newRegAdmin = function (login, password, gender, name, surname) {
-  if (!login || !password || !gender || !name || !surname) {
-    console.log(`регистрация не прошла :`);
-    return;
-  }
-  if (this.uniqueLogin(login)) {
-    console.log(`логин не уникальный : `);
-    return;
-  }
-  const hashPassword = getHashPassword(password);
-  const id = this.getRandomId();
-  const admin = new Data(login, id, hashPassword);
-  this.users.push(admin);
-  const info = new Info(name, surname, gender, id, 1);
-  this.info.push(info);
+// usersDataBase.newRegAdmin = function (login, password, gender, name, surname) {
+//   if (!login || !password || !gender || !name || !surname) {
+//     console.log(`регистрация не прошла :`);
+//     return;
+//   }
+//   if (this.uniqueLogin(login)) {
+//     console.log(`логин не уникальный : `);
+//     return;
+//   }
+//   const hashPassword = getHashPassword(password);
+//   const id = this.getRandomId();
+//   const admin = new Data(login, id, hashPassword);
+//   this.users.push(admin);
+//   const info = new Info(name, surname, gender, id, 1);
+//   this.info.push(info);
 
+// };
 
-};
+// function Data(login, id, password) {
+//   this.login = login;
+//   this.id = id;
+//   this.password = password;
+// }
+// function Info(name, surname, gender, id, systemRole, rate) {
+//   this.name = name;
+//   this.surname = surname;
+//   this.gender = gender;
+//   this.id = id;
+//   this.systemRole = systemRole;
+//   if (rate) {
+//     this.rate = rate;
+//   }
+// }
 
-function Data(login, id, password) {
-  this.login = login;
-  this.id = id;
-  this.password = password;
-}
-function Info(name, surname, gender, id, systemRole, rate) {
-  this.name = name;
-  this.surname = surname;
-  this.gender = gender;
-  this.id = id;
-  this.systemRole = systemRole;
-  if (rate) {
-    this.rate = rate;
-  }
-}
+// usersDataBase.newRegUser("привет", "123", 1, 3, "Шахзод-убийца", "Прекрасный");
 
-usersDataBase.newRegUser("привет", "123", 1, 3, "Шахзод-убийца", "Прекрасный");
+// usersDataBase.newRegUser("привет", "123", 1, 3, "Шахзод-убийца", "Прекрасный");
 
-usersDataBase.newRegUser("привет", "123", 1, 3, "Шахзод-убийца", "Прекрасный");
+// usersDataBase.newRegUser("телепузик", "123", 1, 3, "фывфывфыв", "Прекрасный");
 
-usersDataBase.newRegUser("телепузик", "123", 1, 3, "фывфывфыв", "Прекрасный");
+// usersDataBase.newRegAdmin("пока", "234", 1, "Биджон", "Красивый");
 
-usersDataBase.newRegAdmin("пока", "234", 1, "Биджон", "Красивый");
+// export const dataBaseJson = JSON.stringify(usersDataBase, null, 1);
 
-export const dataBaseJson = JSON.stringify(usersDataBase, null, 1);
-
-// ---------------------------------------------------------------------------------
+// // ---------------------------------------------------------------------------------
 
 // const usersDataBase = {
 //   gender: [
@@ -1012,3 +1010,767 @@ export const dataBaseJson = JSON.stringify(usersDataBase, null, 1);
 
 // };
 // console.log(getDoubledCommonNumbers([1, 2, 3, 4], [3, 4, 5, 6]));
+
+// const usersDataBase = {
+//   gender: [
+//     { gen: "Мужской", id: 1 },
+//     { gen: "Женский", id: 2 },
+//   ],
+//   systemRole: [
+//     { role: "администратор", id: 1 },
+//     { role: "пользователь", id: 2 },
+//   ],
+//   rate: [
+//     { rate: "Обычный", id: 1 },
+//     { rate: "Премиум", id: 2 },
+//     { rate: "VIP", id: 3 },
+//   ],
+//   users: [],
+//   info: [],
+// };
+
+// console.log(usersDataBase.rate[0].rate);
+// console.log(usersDataBase.rate[1].rate);
+// console.log(usersDataBase.rate[2].rate);
+
+// const nums = [10, 20, 30];
+
+// for (let i = 0; i < nums.length; i++) {
+//   const current = nums[i];
+//   console.log(current);
+// }
+
+// const nums = [10, 20, 30];
+// nums.forEach(function (current) {
+//   console.log(current);
+// });
+
+// const usersDataBase = {
+//   gender: [
+//     { gen: "Мужской", id: 1 },
+//     { gen: "Женский", id: 2 },
+//   ],
+//   name: [
+//     { name: "Саша", id: 1 },
+//     { name: "Маша", id: 2 },
+//   ],
+// };
+
+// for (const key in usersDataBase) {
+//   console.log(usersDataBase[key]);
+// }
+
+// let obj = {
+//   1: {
+//     1: 11,
+//     2: 12,
+//     3: 13,
+//   },
+//   2: {
+//     1: 21,
+//     2: 22,
+//     3: 23,
+//   },
+//   3: {
+//     1: 24,
+//     2: 25,
+//     3: 26,
+//   },
+// };
+
+// let acc = 0;
+// for (const key in obj) {
+//   for (const key2 in obj[key]) {
+//     acc += obj[key][key2];
+//   }
+// }
+// console.log(acc);
+
+// const summ = function (a, b, ...args) {
+//   console.log(args.reduce((acc, item) => acc + item));
+// };
+
+// summ(2, 3, 4);
+
+// const sayHello = function (name = "guest") {
+//   console.log(`hello ${name}`);
+// };
+
+// sayHello("");
+
+// function first() {
+//   second();
+//   console.log("first");
+// }
+
+// function second() {
+//   console.log("second");
+// }
+
+// first();
+
+// const factorial = function (num) {
+//   if (num === 1) {
+//     return 1;
+//   }
+//   return num * factorial(num - 1);
+// };
+
+// console.log(factorial(5));
+
+// let obj = {
+//   1: {
+//     1: {
+//       1: 111,
+//       2: 112,
+//       3: 113,
+//     },
+//     2: {
+//       1: 121,
+//       2: 122,
+//       3: 123,
+//     },
+//   },
+//   2: {
+//     1: {
+//       1: 211,
+//       2: 212,
+//       3: 213,
+//     },
+//     2: {
+//       1: 221,
+//       2: 222,
+//       3: 223,
+//     },
+//   },
+//   3: {
+//     1: {
+//       1: 311,
+//       2: 312,
+//       3: 313,
+//     },
+//     2: {
+//       1: 321,
+//       2: 322,
+//       3: 323,
+//     },
+//   },
+// };
+
+// let acc = 0;
+// for (const key in obj) {
+//   for (const key2 in obj[key]) {
+//     acc += obj[key][key][key2];
+//   }
+// }
+
+// let acc = 0;
+// for (const key in obj) {
+//   for (const key2 in obj[key]) {
+//     acc += obj[key][key2];
+//   }
+// }
+// console.log(acc);
+
+// let obj = {
+//   1: {
+//     key1: {
+//       1: 11,
+//       2: 12,
+//       3: 13,
+//     },
+//   },
+//   2: {
+//     key2: {
+//       1: 21,
+//       2: 22,
+//       3: 23,
+//     },
+//   },
+//   3: {
+//     key3: {
+//       1: 24,
+//       2: 25,
+//       3: 26,
+//     },
+//   },
+// };
+
+// let acc = 0;
+// for (const key1 in obj) {
+//   const sub1 = obj[key1];
+//   for (const key2 in sub1) {
+//     const sub2 = sub1[key2];
+//     for (const key3 in sub2) {
+//       const value = (acc += sub2[key3]);
+//       console.log(acc);
+//     }
+//   }
+// }
+
+// // for (const key1 in obj) {
+// //   const sub1 = obj[key1];
+// //   for (const key2 in sub1) {
+// //     const sub2 = sub1[key2];
+// //   }
+// //   for (const key3 in sub2) {
+// //     const value = sub2[key3];
+// //     console.log(key1, key2, key3, value);
+// //   }
+// // }
+
+// // let acc = 0;
+// // for (const key in obj) {
+// //   for (const key2 in obj[key][key]) {
+// //     acc += obj[key][key2];
+// //   }
+// // }
+// // console.log(acc);
+
+// let obj = {
+//   1: {
+//     1: {
+//       1: 111,
+//       2: 112,
+//       3: 113,
+//     },
+//     2: {
+//       1: 121,
+//       2: 122,
+//       3: 123,
+//     },
+//   },
+//   2: {
+//     1: {
+//       1: 211,
+//       2: 212,
+//       3: 213,
+//     },
+//     2: {
+//       1: 221,
+//       2: 222,
+//       3: 223,
+//     },
+//   },
+//   3: {
+//     1: {
+//       1: 311,
+//       2: 312,
+//       3: 313,
+//     },
+//     2: {
+//       1: 321,
+//       2: 322,
+//       3: 323,
+//     },
+//   },
+// };
+
+// let acc = 0;
+// for (const key1 in obj) {
+//   const sub1 = obj[key1];
+//   for (const key2 in sub1) {
+//     const sub2 = sub1[key2];
+//     {
+//       for (const key3 in sub2) {
+//         const value = (acc += sub2[key3]);
+//         console.log(key1, key2, key3, value);
+//       }
+//     }
+//   }
+// }
+
+// let obj = {
+//   A: {
+//     A1: {
+//       1: 111,
+//       2: 112,
+//       3: 113,
+//     },
+//     A2: {
+//       1: 121,
+//       2: 122,
+//       3: 123,
+//     },
+//   },
+//   B: {
+//     B1: {
+//       1: 211,
+//       2: 212,
+//       3: 213,
+//     },
+//     B2: {
+//       1: 221,
+//       2: 222,
+//       3: 223,
+//     },
+//   },
+//   C: {
+//     C1: {
+//       1: 311,
+//       2: 312,
+//       3: 313,
+//     },
+//     C2: {
+//       1: 321,
+//       2: 322,
+//       3: 323,
+//     },
+//   },
+// };
+// let acc = 0;
+// for (const key1 in obj) {
+//   const sub1 = obj[key1];
+
+//   for (const key2 in sub1) {
+//     const sub2 = sub1[key2];
+
+//     for (const key3 in sub2) {
+//       acc += sub2[key3];
+//     }
+//   }
+// }
+
+// // console.log(acc);
+
+// let obj = {
+//   1: {
+//     key1: {
+//       1: 11,
+//       2: 12,
+//       3: 13,
+//     },
+//   },
+//   2: {
+//     key2: {
+//       1: 21,
+//       2: 22,
+//       3: 23,
+//     },
+//   },
+//   3: {
+//     key3: {
+//       1: 24,
+//       2: 25,
+//       3: 26,
+//     },
+//   },
+// };
+
+// let acc = 0;
+// for (const key1 in obj) {
+//   const sub1 = obj[key1];
+
+//   for (const key2 in sub1) {
+//     const sub2 = sub1[key2];
+
+//     for (const key3 in obj) {
+//       const sub3 = sub2[key3];
+//       const value = (acc += sub2[key3]);
+//     }
+//   }
+// }
+// console.log(acc);
+
+// let objectParrisHilton = "папа любит чай горячий , а мама любит...";
+// const vowels = "уеыаоэяиюУЕЫАОЭЯИЮ";
+// let acc = 0;
+// for (const key of objectParrisHilton) {
+//   if (vowels.includes(key)) {
+//     acc++;
+//   }
+// }
+// console.log(acc);
+
+// let palindrom = "шалаш";
+// const palindromNumberTwo = function (str) {
+//   const strReverse = str.split("").reverse().join("");
+//   return strReverse === str ? "совпало" : "не совпало";
+// };
+// console.log(palindromNumberTwo(palindrom));
+
+// const palindrom = "А роза упала на лапу Азора";
+// const palindromNumberOne = function (str) {
+//   const lowerCase = str.toLowerCase().replace(/\s/g, "");
+//   const reverse = lowerCase.split("").reverse().join("");
+
+//   return lowerCase === reverse ? "совпало" : "не совпало";
+// };
+// console.log(palindromNumberOne(palindrom));
+
+// const re = /hello/i;
+// console.log(test(`Hello world`));
+
+// reg.test(str);
+
+// const str = `цена: 1200, скидка 15%, итог 1020`;
+// const numbers = str.match(/\d+/g); // ["1200", "15", "1020"]
+// console.log(numbers);
+
+// const str = `цена : 1200 руб, скидка, 15%,  итог 1020 руб`;
+// const re = /\d+/g;
+// const numbers = str.match(re);
+
+// console.log(numbers);
+
+// const text =
+//   "Сегодня JavaScript и React правят фронтендом, а завтра TypeScript ворвётся ещё сильнее";
+
+// const re = /[A-ZA-ЯЁ][а-za-яё]+/g;
+// const words = text.match(re);
+
+// console.log(words);
+
+// const s = "Hello hi JavaScript JS React node";
+// const re = /[A-Z][a-z]+/g;
+// const text = s.match(re);
+// console.log(text);
+
+// const s = "Hello hi Javascript JS React node go in car Foo BAR bazzzz ZzZ";
+// const re = /[A-Za-z]{3,5}/g;
+// const text = s.match(re);
+// console.log(text);
+
+// const palindrom = "А роза упала на лапу Азора";
+// const palindromNumberOne = function (str) {
+//   const lowerCase = str.toLowerCase().replace(/\s/g, "");
+//   const reverse = lowerCase.split("").reverse().join("");
+
+// const str = `цена : 1200 руб, скидка, 15%,  итог 1020 руб`;
+// const re = /\d+/g;
+// console.log(str.match(re));
+
+// const str = `1 22 333 4444 22 5555 1`;
+// const re = /[0-3]\d*/g;
+// console.log(str.match(re));
+
+// let arr1 = [1, 2, 3];
+// let arr2 = ["a", "b", "c"];
+
+// const mathArray = arr1.concat(arr2);
+// console.log(mathArray);
+
+// const numbers = 123456;
+// let acc = 0;
+// const str = numbers.toString().match(/\d{2}/g);
+// for (const key of str) {
+//   acc += str[key];
+//   return;
+// }
+// console.log(acc);
+
+// let palindrom = "шалаш";
+// const palindromNumberTwo = function (str) {
+//   const strReverse = str.split("").reverse().join("");
+//   return strReverse === str ? "совпало" : "не совпало";
+// };
+// console.log(palindromNumberTwo(palindrom));
+
+// for (const key1 in obj) {
+//   const sub1 = obj[key1];
+
+// const value = (acc += sub2[key3]);
+
+// let acc = 0;
+// for (const key1 in obj) {
+//   const sub1 = obj[key1];
+
+//   for (const key2 in sub1) {
+//     const sub2 = sub1[key2];
+
+//     for (const key3 in obj) {
+//       const sub3 = sub2[key3];
+//       const value = (acc += sub2[key3]);
+//     }
+//   }
+// }
+// console.log(acc);
+
+// const str = `1 22 333 4444 22 5555 1`;
+// const re = /[0-3]\d*/g;
+
+// console.log(str.match(re).join(" "));
+
+// let arr1 = [1, 2, 3];
+// let arr2 = ["a", "b", "c"];
+
+// // const matchArray = function () {
+// //   const arrayNew = [...arr1, ...arr2];
+// //   // for (const element of arr1) {
+// //   //   arrayNew.push(element);
+// //   // }
+// //   // for (const element of arr2) {
+// //   //   arrayNew.push(element);
+// //   // }
+// //   return arrayNew;
+// // };
+// // console.log(matchArray());
+
+// // Напиши функцию, которая сольет эти два массива в один
+// // const mathArray = arr1.concat(arr2);
+// // console.log(mathArray);
+
+// //Дано число 123456. Найди сумму пар цифр этого числа.
+// // То есть должно быть 12+34+56 = 102//
+
+// const numbers = 123456;
+// let acc = 0;
+// const str = numbers.toString().match(/\d{2}/g);
+// for (const key of str) {
+//   acc += +key;
+// }
+// console.log(acc);
+
+// const febanachi = function (num) {
+//   if (num <= 1) {
+//     return num;
+//   }
+//   return febanachi(num - 2) + febanachi(num - 1);
+// };
+// console.log(febanachi(10));
+
+// Фебанача - последовательность чисел которые
+// каждая следующеее число является суммой предыдущих//
+
+// const factorial = function (num) {
+//   if (num === 1) {
+//     return 1;
+//   }
+//   return num * factorial(num - 1);
+// };
+// console.log(factorial(5));
+
+// const text = "Hello, my friend_123! JS is cool.";
+// const re = /[A-Za-z]+/g;
+// const words = text.match(re);
+// console.log(words);
+
+// const s = "hello, my friend_123! JS-2026 is SUPER-cool.";
+// const re = /[A-Za-z]+/g;
+// const words = s.match(re);
+// console.log(words);
+
+// const s = "Hello MY friend_123! JS-2026 is super-cool and WOW yep OK";
+// const re = /[a-z]+/g;
+// const lowerCase = s.match(re);
+// console.log(lowerCase);
+
+// const s = "Hello MY friend_123! JS-2026 is super-cool and WOW yep OK";
+// const re = /\b[A-Z]+\b/g;
+// const upperCase = s.match(re);
+// console.log(upperCase);
+
+// function sumTo(n) {
+//   if (n === 1) {
+//     // базовый случай
+//     return 1;
+//   }
+
+//   return n + sumTo(n - 1); // рекурсивный случай
+// }
+
+// console.log(sumTo(4));
+
+// function sumTo(n) {
+//   if (n === 1) {
+//     return n;
+//   }
+//   return n + sumTo(n - 1);
+// }
+// console.log(sumTo(5));
+
+// function length(str) {
+//   if (str === "") {
+//     return 0;
+//   }
+//   str.slice(1);
+//   return 1 + length(str.slice(1));
+// }
+// console.log(length("мурзик"));
+// console.log(length("головастик"));
+
+// function sumTo(n) {
+//   if (n === 1) {
+//     return n;
+//   }
+//   return n + sumTo(n - 1);
+// }
+// console.log(sumTo(5));
+
+// function backCount(n) {
+//   if (n === 0) {
+//     return n;
+//   }
+//   console.log(n);
+//   return backCount(n - 1);
+// }
+
+// console.log(backCount(10));
+
+// const pupsik = [10, 20, 30, 40];
+// function sumPupsik(num) {
+//   if (num.length === 0) {
+//     return 0;
+//   }
+//   return num[0] + sumPupsik(num.slice(1));
+// }
+
+// console.log(sumPupsik(pupsik));
+
+// function array(numbers, numbers2) {
+//   if (numbers.length === 0) {
+//     return false;
+//   }
+//   if (numbers2 === numbers[0]) {
+//     return true;
+//   }
+//   return array(numbers.slice(1), numbers2);
+// }
+
+// console.log(array([10, 20, 30, 40], 123123));
+
+// function sumTo(item) {
+//   if (item === 1) {
+//     return item;
+//   }
+//   return item + sumTo(item - 1);
+// }
+
+// console.log(sumTo(10));
+
+// function sumArray(ember) {
+//   if (ember.length === 0) {
+//     return 0;
+//   }
+//   return ember[0] + sumArray(ember.slice(1));
+// }
+
+// console.log(sumArray([1, 2, 3, 4]));
+
+// function printArray(item) {
+//   if (item.length === 0) {
+//     return;
+//   }
+//   console.log(item[0]);
+//   printArray(item.slice(1));
+// }
+
+// printArray([10, 20, 30]);
+
+// function maxInArray(array) {
+//   if (array.length === 0) {
+//     return 0;
+//   }
+//   let first = array[0];
+//   let maxTail = maxInArray(array.slice(1));
+//   if (first > maxTail) {
+//     return first;
+//   }
+//   return maxTail;
+// }
+
+// maxInArray([5, 2, 9, 1, 7]);
+// console.log(maxInArray([5, 2, 9, 1, 7]));
+
+// const users = [
+//   { name: "Alice", city: "Berlin" },
+//   { name: "Bob", city: "Paris" },
+//   { name: "Charlie", city: "Berlin" },
+// ];
+
+// function groupUsers(users) {
+//   const object = {};
+//   users.forEach((item) => {
+//     if (!object[item.city]) {
+//       object[item.city] = [];
+//     }
+//     object[item.city].push(item.name);
+//   });
+//   return object;
+// }
+
+// console.log(groupUsers(users));
+
+// const users = [
+//   { name: "Alice", city: "Berlin" },
+//   { name: "Bob", city: "Paris" },
+//   { name: "Charlie", city: "Berlin" },
+// ];
+
+// function groupUsers(users) {
+//   const object = {};
+//   users.forEach((item) => {
+//     if (!object[item.city]) {
+//       object[item.city] = [];
+//     }
+//   });
+// }
+
+// function palindrom(item) {
+//   if (item.length <= 1) {
+//     return true;
+//   }
+//   if (item[0] !== item[item.length - 1]) {
+//     return false;
+//   }
+//   return palindrom(item.slice(1, -1));
+// }
+
+// palindrom("шалаш");
+// console.log(palindrom("шалаш"));
+
+// const users = [
+//   { name: `Alce`, city: `Berlin` },
+//   { name: `Bob`, city: `Paris` },
+//   { name: `Charlie`, city: `Berlin` },
+// ];
+// function groupUsers(users) {
+//   const object = {};
+//   users.forEach((item) => {
+//     if (!object[item.city]) {
+//       object[item.city] = [];
+//     }
+//     object[item.city].push(item.name);
+//   });
+//   return object;
+// }
+// console.log(groupUsers(users));
+
+const products = [
+  { name: "Laptop", category: "Electronics", price: 1200 },
+  { name: "Phone", category: "Electronics", price: 800 },
+  { name: "Apple", category: "Food", price: 2 },
+  { name: "Bread", category: "Food", price: 3 },
+  { name: "T-shirt", category: "Clothes", price: 25 },
+];
+
+function groupProducts(products) {
+  const object = {};
+  products.forEach((item) => {
+    if (!object[item.category]) {
+      object[item.category] = [];
+    }
+  });
+  products.forEach((item) => {
+    if (item.price <= 10) {
+      return true;
+    }
+    object[item.category].push(item.name);
+  });
+  return object;
+}
+
+// console.log(groupProducts(products));
+
+function breakdownMs(ms) {
+  const inSeconds = ms / 1000;
+  const inMinute = inSeconds / 60;
+  const inHour = inMinute / 60;
+  const inDay = inHour / 24;
+  const inMonth = inDay / 30;
+  const inYear = inMonth / 12;
+  console.log(inYear, inMonth, inDay);
+  return;
+}
+
+breakdownMs(74200000);
