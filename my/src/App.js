@@ -1,62 +1,46 @@
 import "./App.css";
-import { createPortal } from "react-dom";
-import { useCounter } from "./useCounter";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { useState } from "react";
 
-function CounterDisplay({ count }) {
-  return <h2>{count}</h2>;
-}
+function Home() {
+  const [count, setCount] = useState(0);
 
-function CounterButtons({ onDecrement, onReset, onIncrement, onOpenModal }) {
   return (
-    <div className="buttons">
-      <button onClick={onDecrement}>-</button>
-      <button onClick={onReset}>Сброс</button>
-      <button onClick={onIncrement}>+</button>
-      <button onClick={onOpenModal}>Инфо</button>
+    <div className="page">
+      <h1>Счётчик</h1>
+      <h2>{count}</h2>
+
+      <div className="buttons">
+        <button onClick={() => setCount(count - 1)}>-</button>
+        <button onClick={() => setCount(0)}>Сброс</button>
+        <button onClick={() => setCount(count + 1)}>+</button>
+      </div>
     </div>
   );
 }
 
-function Modal({ show, onClose, count }) {
-  if (!show) return null;
-
-  return createPortal(
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-window" onClick={(e) => e.stopPropagation()}>
-        <h3>Модальное окно</h3>
-        <p>Текущее значение счётчика: {count}</p>
-        <button onClick={onClose}>Закрыть</button>
-      </div>
-    </div>,
-    document.body,
+function About() {
+  return (
+    <div className="page">
+      <h1>О проекте</h1>
+      <p>Это простое SPA-приложение на React с маршрутизацией.</p>
+    </div>
   );
 }
 
 function App() {
-  const {
-    count,
-    increment,
-    decrement,
-    reset,
-    showModal,
-    openModal,
-    closeModal,
-  } = useCounter(0);
-
   return (
-    <div className="counter">
-      <h1>Счётчик</h1>
+    <div className="app">
+      <nav className="nav">
+        <Link to="/">Главная</Link>
+        <Link to="/about">О проекте</Link>
+      </nav>
 
-      <CounterDisplay count={count} />
-
-      <CounterButtons
-        onDecrement={decrement}
-        onReset={reset}
-        onIncrement={increment}
-        onOpenModal={openModal}
-      />
-
-      <Modal show={showModal} onClose={closeModal} count={count} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
   );
 }
