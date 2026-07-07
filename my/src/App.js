@@ -1,46 +1,44 @@
 import "./App.css";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
 import { useState } from "react";
-
-function Home() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <div className="page">
-      <h1>Счётчик</h1>
-      <h2>{count}</h2>
-
-      <div className="buttons">
-        <button onClick={() => setCount(count - 1)}>-</button>
-        <button onClick={() => setCount(0)}>Сброс</button>
-        <button onClick={() => setCount(count + 1)}>+</button>
-      </div>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div className="page">
-      <h1>О проекте</h1>
-      <p>Это простое SPA-приложение на React с маршрутизацией.</p>
-    </div>
-  );
-}
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo, deleteTodo, toggleTodo } from "./todoSlice";
 
 function App() {
-  return (
-    <div className="app">
-      <nav className="nav">
-        <Link to="/">Главная</Link>
-        <Link to="/about">О проекте</Link>
-      </nav>
+  const [inputValue, setInputValue] = useState("");
+  const todos = useSelector((state) => state.todos.items);
+  const dispatch = useDispatch();
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+  const handleAdd = () => {
+    dispatch(addTodo(inputValue));
+    setInputValue("");
+  };
+
+  return (
+    <div className="todo-app">
+      <h1>Мой Todo List</h1>
+
+      <div className="todo-form">
+        <input
+          type="text"
+          placeholder="Введите задачу"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button onClick={handleAdd}>Добавить</button>
+      </div>
+
+      <ul className="todo-list">
+        {todos.map((todo) => (
+          <li key={todo.id} className={todo.completed ? "done" : ""}>
+            <span onClick={() => dispatch(toggleTodo(todo.id))}>
+              {todo.text}
+            </span>
+            <button onClick={() => dispatch(deleteTodo(todo.id))}>
+              Удалить
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
