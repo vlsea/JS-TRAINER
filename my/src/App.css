@@ -1,4 +1,4 @@
-css body {
+body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -6,12 +6,35 @@ css body {
 
 .counter {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 60px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .buttons button {
-  margin: 0 10px;
   padding: 10px 16px;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-window {
+  background: white;
+  padding: 24px;
+  border-radius: 10px;
+  min-width: 260px;
+  text-align: center;
 }
